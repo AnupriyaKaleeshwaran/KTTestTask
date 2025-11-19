@@ -1,6 +1,7 @@
 package com.example.testtask.ui.map
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testtask.databinding.ActivityMapBinding
 import com.example.testtask.ui.viewmodel.MapViewModel
@@ -80,6 +81,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupEmptyButtons() {
+        binding.btnPlay.visibility = View.GONE
+        binding.btnStop.visibility = View.GONE
         binding.btnPlay.setOnClickListener { }
         binding.btnStop.setOnClickListener { }
     }
