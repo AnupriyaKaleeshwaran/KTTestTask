@@ -4,9 +4,11 @@ import UserAdapter
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.health.connect.datatypes.units.Length
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -83,8 +85,14 @@ class LoginActivity : AppCompatActivity() {
         requestLocationPermissions {
         }
         binding.btnLogin.setOnClickListener {
+
             val email = binding.etEmail.text.toString()
-            vm.login(email)
+            if (!email.isEmpty()) {
+                vm.login(email)
+            } else {
+                Toast.makeText(this, "Please enter username", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         vm.user.observe(this) { user ->
