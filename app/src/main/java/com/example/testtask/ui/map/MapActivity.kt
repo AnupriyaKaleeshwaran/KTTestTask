@@ -16,6 +16,9 @@ import androidx.activity.viewModels
 import kotlinx.coroutines.*
 import com.example.testtask.data.model.Location
 import com.example.testtask.ui.adapter.CustomInfoWindowAdapter
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -100,12 +103,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             for (loc in points) {
                 val pos = LatLng(loc.latitude, loc.longitude)
                 map.clear()
+                val timestamp = loc.timestamp // assuming it's Long in millis
+                val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+                val formattedTime = sdf.format(Date(timestamp))
 
                 map.addMarker(
                     MarkerOptions()
                         .position(pos)
                         .title("Lat: ${loc.latitude}, Lng: ${loc.longitude}")
-                        .snippet("Time: ${loc.timestamp}")
+                        .snippet("Date/Time: $formattedTime")
                 )?.showInfoWindow()
 
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 18f))

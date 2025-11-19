@@ -194,7 +194,7 @@ class LoginActivity : AppCompatActivity() {
         // every 15 minutes
         val periodicReq = PeriodicWorkRequestBuilder<LocationWorker>(
             15, TimeUnit.MINUTES
-        ).setInputData(data).build()
+        ).setInputData(data).setInitialDelay(15, TimeUnit.MINUTES).build()
 
         workManager.enqueueUniquePeriodicWork(
             "loc_worker",
